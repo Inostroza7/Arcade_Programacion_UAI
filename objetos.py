@@ -25,21 +25,26 @@ admin.saludo()
 admin.superSaludo()
 """""""""
 
+
 class Animal:
     def __init__(self, nombre, sonido):
         self.nombre = nombre
         self.sonido = sonido
+
     def saludo(self):
-        print('Hola soy un', self.tipo ,'y mi sonido es el', self.sonido)
+        print('Hola soy un', self.tipo, ', mi nombre es', self.nombre, 'y mi sonido es el', self.sonido)
+
 
 class Gato(Animal):
     tipo = "gato"
 
+
 class Perro(Animal):
     tipo = 'perro'
 
-perro = Perro('Firulais','Ladrido')
+
+perro = Perro('Firulais', 'Ladrido')
 perro.saludo()
 
-gato = Gato('Bola de nieve','Maullido')
+gato = Gato('Bola de nieve', 'Maullido')
 gato.saludo()
