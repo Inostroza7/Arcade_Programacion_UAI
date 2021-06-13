@@ -9,4 +9,4 @@ arcade.start_render() # Comenzar a dibujar en pantalla
 
 arcade.finish_render() # Finaliza el dibujo
 
-arcade.run # Mostrar todo en ventana
+arcade.run # Mostrar en ventana
