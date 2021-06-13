@@ -22,3 +22,22 @@ usuario.saludo()
 admin = Admin('Elon','Musk')
 admin.saludo()
 admin.superSaludo()
+
+class Animal:
+    def __init__(self, nombre, sonido):
+        self.nombre = nombre
+        self.sonido = sonido
+
+class Gato(Animal):
+    def saludo(self):
+        print('Hola soy un Gato y mi sonido es el', self.sonido)
+
+class Perro(Animal):
+    def saludo(self):
+        print('Hola soy un Perro y mi sonido es el', self.sonido)
+
+perro = Perro('Firulais','Ladrido')
+perro.saludo()
+
+gato = Gato('Bola de nieve','Maullido')
+gato.saludo()
