@@ -1,12 +1,14 @@
-import arcade # Importamos Arcade
+import arcade  # Importamos Arcade
 
-#definimos la ventana de Arcade
-arcade.open_window(800,600, 'Titulo Arcade',True,True) #(weight,lenth,titulo,reconfigurable,antialiasing)
+# definimos la ventana de Arcade
+arcade.open_window(800, 600, 'Titulo Arcade', True, True)  # (weight,lenth,titulo,reconfigurable,antialiasing)
 
-arcade.start_render() # Comenzar a dibujar en pantalla
+arcade.set_background_color(arcade.color.BLACK_LEATHER_JACKET)  # Definimos el fondo de la pantalla
 
-#dibujo
+arcade.start_render()  # Comenzar a dibujar en pantalla
 
-arcade.finish_render() # Finaliza el dibujo
+# dibujo
 
-arcade.run # Mostrar en ventana
+arcade.finish_render()  # Finaliza el dibujo
+
+arcade.run  # Mostrar en ventana
