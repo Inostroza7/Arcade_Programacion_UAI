@@ -1,3 +1,4 @@
+"""""""""
 class Usuario:
     def __init__(self, nombre, apellido):
         self.nombre = nombre
@@ -22,19 +23,20 @@ usuario.saludo()
 admin = Admin('Elon','Musk')
 admin.saludo()
 admin.superSaludo()
+"""""""""
 
 class Animal:
     def __init__(self, nombre, sonido):
         self.nombre = nombre
         self.sonido = sonido
+    def saludo(self):
+        print('Hola soy un', self.tipo ,'y mi sonido es el', self.sonido)
 
 class Gato(Animal):
-    def saludo(self):
-        print('Hola soy un Gato y mi sonido es el', self.sonido)
+    tipo = "gato"
 
 class Perro(Animal):
-    def saludo(self):
-        print('Hola soy un Perro y mi sonido es el', self.sonido)
+    tipo = 'perro'
 
 perro = Perro('Firulais','Ladrido')
 perro.saludo()
