@@ -1,14 +1,33 @@
 import arcade  # Importamos Arcade
 
-# definimos la ventana de Arcade
-arcade.open_window(800, 600, 'Titulo Arcade', True, True)  # (weight,lenth,titulo,reconfigurable,antialiasing)
+ancho = 1080
+alto = 720
+arcade.open_window(ancho,alto,"SPACE JAM", True,True)
 
-arcade.set_background_color(arcade.color.BLACK_LEATHER_JACKET)  # Definimos el fondo de la pantalla
+colorLetras = arcade.color.SKY_BLUE
+mainWallpaper = arcade.Sprite("main_Wallpaper.jpeg",scale= ,1.0)
+mainSpaceShip = arcade.Sprite("SpaceShip_Sprite.png",scale= ,1.0)
 
-arcade.start_render()  # Comenzar a dibujar en pantalla
+arcade.start_render()
 
-# dibujo
+# Main Wallpaper
+mainWallpaper.center_y = alto//2
+mainWallpaper.left = 0
+mainWallpaperList = arcade.SpriteList()
+mainWallpaperList.append(mainWallpaper)
+mainWallpaperList.draw()
 
-arcade.finish_render()  # Finaliza el dibujo
+# SpaceShip Wallpaper
+mainSpaceShip.center_y = alto//2+100
+mainSpaceShip.left = ancho//2-90
+mainSpaceShipList = arcade.SpriteList()
+mainSpaceShipList.append(mainSpaceShip)
+mainSpaceShipList.draw()
 
-arcade.run  # Mostrar en ventana
+arcade.draw_text('Nuevo Juego', ancho//2-170, alto , colorLetras, 50)
+arcade.draw_text('Mejores Puntajes', ancho//2-170, alto , colorLetras, 50)
+arcade.draw_text('Salir del Juego', ancho//2-170, alto , colorLetras, 50)
+
+arcade.finish_render()
+
+arcade.run()
