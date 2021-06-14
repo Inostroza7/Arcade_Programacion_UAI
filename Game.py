@@ -18,7 +18,7 @@ mainWallpaperList.append(mainWallpaper)
 mainWallpaperList.draw()
 
 # SpaceShip Wallpaper
-mainSpaceShip.center_y = alto//2+100
+mainSpaceShip.center_y = alto//2+50
 mainSpaceShip.left = ancho//2
 mainSpaceShipList = arcade.SpriteList()
 mainSpaceShipList.append(mainSpaceShip)
