@@ -19,14 +19,15 @@ mainWallpaperList.draw()
 
 # SpaceShip Wallpaper
 mainSpaceShip.center_y = alto//2+100
-mainSpaceShip.left = ancho//2-90
+mainSpaceShip.left = ancho//2
 mainSpaceShipList = arcade.SpriteList()
 mainSpaceShipList.append(mainSpaceShip)
 mainSpaceShipList.draw()
 
-arcade.draw_text('Nuevo Juego', ancho//2-170, alto-100 , colorLetras, 50)
-arcade.draw_text('Mejores Puntajes', ancho//2-170, alto//2-50 , colorLetras, 32)
-arcade.draw_text('Salir del Juego', ancho//2-170, alto//4 , colorLetras, 32)
+arcade.draw_text('SPACE JAM', ancho//2-500, alto-300 , arcade.color.DEEP_LEMON, 70)
+arcade.draw_text('Nuevo Juego', ancho//2-500, alto//2 , colorLetras, 32)
+arcade.draw_text('Mejores Puntajes', ancho//2-500, alto//2-50 , colorLetras, 32)
+arcade.draw_text('Salir del Juego', ancho//2-500, alto//2-100 , colorLetras, 32)
 
 arcade.finish_render()
 
