@@ -5,8 +5,8 @@ alto = 720
 arcade.open_window(ancho,alto,"SPACE JAM", True,True)
 
 colorLetras = arcade.color.SKY_BLUE
-mainWallpaper = arcade.Sprite("main_Wallpaper.jpeg",scale= ,1.0)
-mainSpaceShip = arcade.Sprite("SpaceShip_Sprite.png",scale= ,1.0)
+mainWallpaper = arcade.Sprite("main_Wallpaper.jpeg",scale= 1.0)
+mainSpaceShip = arcade.Sprite("SpaceShip_Sprite.png",scale= 1.0)
 
 arcade.start_render()
 

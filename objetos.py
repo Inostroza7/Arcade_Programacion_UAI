@@ -15,7 +15,7 @@ usuario = Usuario('Gustavo','Inostroza')
 
 usuario.saludo()
 usuario.nombre = 'Ignacio'
-usuario.saludo()
+usuario.saludo() 
 # del usuario.nombre # Eliminamos nombre del usuario
 # del usuario
 # print(usuario) #Error
@@ -44,7 +44,7 @@ class Perro(Animal):
 
 
 perro = Perro('Firulais', 'Ladrido')
-perro.saludo()
+perro.saludo()  c
 
 gato = Gato('Bola de nieve', 'Maullido')
 gato.saludo()
