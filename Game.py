@@ -24,9 +24,9 @@ mainSpaceShipList = arcade.SpriteList()
 mainSpaceShipList.append(mainSpaceShip)
 mainSpaceShipList.draw()
 
-arcade.draw_text('Nuevo Juego', ancho//2-170, alto , colorLetras, 50)
-arcade.draw_text('Mejores Puntajes', ancho//2-170, alto , colorLetras, 50)
-arcade.draw_text('Salir del Juego', ancho//2-170, alto , colorLetras, 50)
+arcade.draw_text('Nuevo Juego', ancho//2-170, alto-100 , colorLetras, 50)
+arcade.draw_text('Mejores Puntajes', ancho//2-170, alto//2-50 , colorLetras, 32)
+arcade.draw_text('Salir del Juego', ancho//2-170, alto//4 , colorLetras, 32)
 
 arcade.finish_render()
 
