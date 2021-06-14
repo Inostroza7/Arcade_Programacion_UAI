@@ -3,15 +3,15 @@ import arcade
 #constantes
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCREEN_TITLE = "titulo"
+SCREEN_TITLE = "Space Game"
 SCALING = 0.2
 
 class MyGame(arcade.Window):
     """
     Clase de aplicación principal.
 
-    NOTE: Continúe y elimine los métodos que no necesita. Si necesita un método, elimine el "pass" 
-    y reemplácelo con su propio código. No deje "pass" en este programa.   
+    NOTE: Continúe y elimine los métodos que no necesita. Si necesita un método, elimine el "pass"
+    y reemplácelo con su propio código. No deje "pass" en este programa.
     """
     #-------------------------------------------------------------------------------------------------#
     def _init_(self, width, height, title):
