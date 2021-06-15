@@ -1,7 +1,35 @@
-import arcade  # Importamos Arcade
+import arcade
+import random
+import time
+import os
 
-ancho = 1080
-alto = 720
+
+# Dimensiones pantalla
+SCREEN_WIDTH = 1300
+SCREEN_HEIGHT = 700
+SCREEN_TITLE = "Space Jam"
+OFFSCREEN_SPACE = 300
+LEFT_LIMIT = -OFFSCREEN_SPACE
+RIGHT_LIMIT = SCREEN_WIDTH + OFFSCREEN_SPACE
+BOTTOM_LIMIT = -OFFSCREEN_SPACE
+TOP_LIMIT = SCREEN_HEIGHT + OFFSCREEN_SPACE
+
+# Escalas para los distintos Sprites
+SCALE_SPACESHIP = 1 # Player
+SCALE_ENEMY = 1 # Enemigo
+SCALE_LIFE = 1 # Vida
+SCALE_TIME = 1 # Tiempo
+SCALE_SCORE = 1  # Puntaje
+
+class TurningSprite(arcade.Sprite):
+    """ Sprite que establece su ángulo en la dirección en la que viaja la nave. """
+    def update(self):
+        super().update()
+        self.angle = math.degrees(math.atan2(self.change_y, self.change_x))
+
+
+
+
 arcade.open_window(ancho,alto,"SPACE JAM", True,True)
 
 colorLetras = arcade.color.SKY_BLUE
