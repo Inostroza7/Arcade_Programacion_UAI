@@ -36,7 +36,7 @@ class InstructionView(arcade.View):
 
     def __init__(self):
         super().__init__()
-        self.texture = arcade.load_texture("introWallpaper.png")
+        self.texture = arcade.load_texture("img/wall/introWallpaper.png")
         # Restablecer la ventana gráfica, necesaria si tenemos un juego de desplazamiento y necesitamos
         # para restablecer la ventana gráfica al inicio para que podamos ver lo que dibujamos.
         arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
