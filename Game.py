@@ -476,3 +476,17 @@ arcade.draw_text('Salir del Juego', ancho//2-500, alto//2-100 , colorLetras, 32)
 arcade.finish_render()
 
 arcade.run()
+
+
+
+
+
+def main():
+    window = arcade.Window(SCREEN_WIDHT, SCREEN_HEIGHT, SCREEN_TITLE)
+    start_view = MenuView()
+    window.show_view(start_view)
+    arcade.run()
+
+
+if __name__ == "__main__":
+    main()
