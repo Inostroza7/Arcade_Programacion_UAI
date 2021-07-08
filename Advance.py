@@ -178,7 +178,7 @@ class MyGame(arcade.Window):
         self.lives = 3
 
         # Sounds
-        self.laser_sound = arcade.load_sound("sounds/laser1.ogg")
+        self.laser_sound = arcade.load_sound("sound/blaster.mp3")
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -194,14 +194,14 @@ class MyGame(arcade.Window):
 
         # Set up the player
         self.score = 0
-        self.player_sprite = ShipSprite("images/playerShip1_orange.png", SCALE)
+        self.player_sprite = ShipSprite("img/sprites/SpaceShip_Sprite.png", SCALE)
         self.all_sprites_list.append(self.player_sprite)
         self.lives = 3
 
         # Set up the little icons that represent the player lives.
         cur_pos = 10
         for i in range(self.lives):
-            life = arcade.Sprite("images/playerLife1_orange.png", SCALE)
+            life = arcade.Sprite("img/sprites/SpaceShip_Sprite.png", SCALE)
             life.center_x = cur_pos + life.width
             life.center_y = life.height
             cur_pos += life.width
@@ -209,10 +209,10 @@ class MyGame(arcade.Window):
             self.ship_life_list.append(life)
 
             # Make the asteroids
-        image_list = ("images/meteorGrey_big1.png",
-                      "images/meteorGrey_big2.png",
-                      "images/meteorGrey_big3.png",
-                      "images/meteorGrey_big4.png")
+        image_list = ("img/sprites/alien_01.png",
+                      "img/sprites/alien_02.png",
+                      "img/sprites/alien_03.png",
+                      "img/sprites/alien_04.png")
         for i in range(3):
             image_no = random.randrange(4)
             enemy_sprite = AsteroidSprite(image_list[image_no], SCALE)
@@ -250,7 +250,7 @@ class MyGame(arcade.Window):
         """ Called whenever a key is pressed. """
         # Shoot if the player hit the space bar and we aren't respawning.
         if not self.player_sprite.respawning and symbol == arcade.key.SPACE:
-            bullet_sprite = BulletSprite("images/laserBlue01.png", SCALE)
+            bullet_sprite = BulletSprite("img/sprites/laser.png", SCALE)
 
             bullet_speed = 13
             bullet_sprite.change_y = \
