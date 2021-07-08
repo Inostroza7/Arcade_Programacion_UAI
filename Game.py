@@ -1,7 +1,7 @@
 import arcade
 import random
-import time
-import os
+import math
+
 
 
 # Dimensiones pantalla
@@ -17,6 +17,7 @@ BOTTOM_LIMIT = -OFFSCREEN_SPACE
 TOP_LIMIT = SCREEN_HEIGHT + OFFSCREEN_SPACE
 
 # Escalas para los distintos Sprites
+SCALE = 0.5
 SCALE_SPACESHIP = 1 # Player
 SCALE_ENEMY = 1 # Enemigo
 SCALE_LIFE = 1 # Vida
@@ -32,20 +33,20 @@ EMEMY2_SPEED = 2.5
 MUSIC_VOLUME = 0.03
 MUSIC_VOLUMEHIGH = 0.25
 
-class MenuView(arcade.View):
+class InstructionView(arcade.View): # Definimos el menú inicial
 
     def __init__(self):
         super().__init__()
-        self.texture = arcade.load_texture("introWallpaper.png")
+        self.texture = arcade.load_texture("img/wall/introWallpaper.png")
         # Restablecer la ventana gráfica, necesaria si tenemos un juego de desplazamiento y necesitamos
         # para restablecer la ventana gráfica al inicio para que podamos ver lo que dibujamos.
-        arcade.set_viewport(0, SCREE_WIDHT - 1, 0, SCREE_HEIGHT - 1)
+        arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
 
     def on_draw(self):
         """ Dibuja esta vista """
         arcade.start_render()
-        self.texture.draw_sized(SCREE_WIDHT / 2, SCREE_HEIGHT / 2,
-                                SCREE_WIDHT, SCREE_HEIGHT)
+        self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                                SCREEN_WIDTH, SCREEN_HEIGHT)
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         """ Si el usuario presiona el botón del mouse, inicia el juego. """
@@ -53,56 +54,17 @@ class MenuView(arcade.View):
         game_view.setup()
         self.window.show_view(game_view)
 
-class Enemy(arcade.Sprite):
+class TurningSprite(arcade.Sprite): # Sprite que establece su angulo en direccion en la que viaja la nave
 
-    def follow_sprite(self, player_sprite):
-        # Esta función es para que el Enemy (self) se mueva hacia el personaje (player.sprite).
-
-        if self.center_y < player_sprite.center_y:
-            self.center_y += min(ENEMY_SPEED, player_sprite.center_y - self.center_y)
-        elif self.center_y > player_sprite.center_y:
-            self.center_y -= min(ENEMY_SPEED, self.center_y - player_sprite.center_y)
-
-        if self.center_x < player_sprite.center_x:
-            self.center_x += min(ENEMY_SPEED, player_sprite.center_x - self.center_x)
-        elif self.center_x > player_sprite.center_x:
-            self.center_x -= min(ENEMY_SPEED_SPEED, self.center_x - player_sprite.center_x)
-
-class Enemy2(arcade.Sprite):
-
-    def follow_sprite(self, player_sprite):
-        # Esta función es para que el Enemy2 (self) se mueva hacia el personaje (player.sprite).
-
-        if self.center_y < player_sprite.center_y:
-            self.center_y += min(ENEMY2_SPEED, player_sprite.center_y - self.center_y)
-        elif self.center_y > player_sprite.center_y:
-            self.center_y -= min(ENEMY2_SPEED, self.center_y - player_sprite.center_y)
-
-        if self.center_x < player_sprite.center_x:
-            self.center_x += min(ENEMYw_SPEED, player_sprite.center_x - self.center_x)
-        elif self.center_x > player_sprite.center_x:
-            self.center_x -= min(ENEMY2_SPEED_SPEED, self.center_x - player_sprite.center_x)
-
-
-
-
-class TurningSprite(arcade.Sprite):
-    """ Sprite que establece su ángulo en la dirección en la que viaja la nave. """
     def update(self):
         super().update()
         self.angle = math.degrees(math.atan2(self.change_y, self.change_x))
 
-class ShipSprite(arcade.Sprite):
-    """
-    Sprite que representa nuestra nave
+class ShipSprite(arcade.Sprite): # Sprite que representa nuestra nave
 
-    Herencia de arcade.Sprite.
-    """
     def __init__(self, filename, scale):
-        """ Definimos nuestra nave. """
 
-        # Super llama a la funcion padre
-        super().__init__(filename, scale)
+        super().__init__(filename, scale) # Super llama a la funcion padre
 
         # El ángulo se hereda de la funcion padre
         self.thrust = 0
@@ -160,7 +122,7 @@ class ShipSprite(arcade.Sprite):
         """ Llama a la clase padre. """
         super().update()
 
-class AsteroidSprite(arcade.Sprite): # TODO Modificar esto por naves enemigas
+class AsteroidSprite(arcade.Sprite):
     """ Sprite that represents an asteroid. """
 
     def __init__(self, image_file_name, scale):
@@ -179,7 +141,7 @@ class AsteroidSprite(arcade.Sprite): # TODO Modificar esto por naves enemigas
         if self.center_y < BOTTOM_LIMIT:
             self.center_y = TOP_LIMIT
 
-class BulletSprite(TurningSprite): #Definimos las balas
+class BulletSprite(TurningSprite):
     """
     Class that represents a bullet.
 
@@ -193,7 +155,7 @@ class BulletSprite(TurningSprite): #Definimos las balas
                 self.center_y > 1100 or self.center_y < -100:
             self.kill()
 
-class MyWindow(arcade.Window):
+class MyGame(arcade.Window):
     """ Main application class. """
 
     def __init__(self):
@@ -215,7 +177,7 @@ class MyWindow(arcade.Window):
         self.lives = 3
 
         # Sounds
-        self.laser_sound = arcade.load_sound("sounds/laser1.ogg")
+        self.laser_sound = arcade.load_sound("sound/blaster.mp3")
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -231,25 +193,25 @@ class MyWindow(arcade.Window):
 
         # Set up the player
         self.score = 0
-        self.player_sprite = ShipSprite("images/playerShip1_orange.png", SCALE)
+        self.player_sprite = ShipSprite("img/sprites/SpaceShip_Sprite.png", SCALE)
         self.all_sprites_list.append(self.player_sprite)
         self.lives = 3
 
         # Set up the little icons that represent the player lives.
         cur_pos = 10
         for i in range(self.lives):
-            life = arcade.Sprite("images/playerLife1_orange.png", SCALE)
+            life = arcade.Sprite("img/sprites/SpaceShip_Sprite.png", SCALE)
             life.center_x = cur_pos + life.width
             life.center_y = life.height
             cur_pos += life.width
             self.all_sprites_list.append(life)
             self.ship_life_list.append(life)
 
-        # Make the asteroids
-        image_list = ("images/meteorGrey_big1.png",
-                      "images/meteorGrey_big2.png",
-                      "images/meteorGrey_big3.png",
-                      "images/meteorGrey_big4.png")
+            # Make the asteroids
+        image_list = ("img/sprites/alien_01.png",
+                      "img/sprites/alien_02.png",
+                      "img/sprites/alien_03.png",
+                      "img/sprites/alien_04.png")
         for i in range(3):
             image_no = random.randrange(4)
             enemy_sprite = AsteroidSprite(image_list[image_no], SCALE)
@@ -287,7 +249,7 @@ class MyWindow(arcade.Window):
         """ Called whenever a key is pressed. """
         # Shoot if the player hit the space bar and we aren't respawning.
         if not self.player_sprite.respawning and symbol == arcade.key.SPACE:
-            bullet_sprite = BulletSprite("images/laserBlue01.png", SCALE)
+            bullet_sprite = BulletSprite("img/sprites/laser.png", SCALE)
 
             bullet_speed = 13
             bullet_sprite.change_y = \
@@ -424,69 +386,12 @@ class MyWindow(arcade.Window):
                         self.game_over = True
                         print("Game over")
 
-
+# Final
 def main():
-    window = MyWindow()
-    window.start_new_game()
-    arcade.run()
-
-
-if __name__ == "__main__":
-    main()
-
-
-
-
-
-
-
-
-
-
-
-
-#############################
-arcade.open_window(ancho,alto,"SPACE JAM", True,True)
-
-colorLetras = arcade.color.SKY_BLUE
-mainWallpaper = arcade.Sprite("main_Wallpaper.jpeg",scale= 1.0)
-mainSpaceShip = arcade.Sprite("SpaceShip_Sprite.png",scale= 1.0)
-
-arcade.start_render()
-
-# Main Wallpaper
-mainWallpaper.center_y = alto//2
-mainWallpaper.left = 0
-mainWallpaperList = arcade.SpriteList()
-mainWallpaperList.append(mainWallpaper)
-mainWallpaperList.draw()
-
-# SpaceShip Wallpaper
-mainSpaceShip.center_y = alto//2+50
-mainSpaceShip.left = ancho//2
-mainSpaceShipList = arcade.SpriteList()
-mainSpaceShipList.append(mainSpaceShip)
-mainSpaceShipList.draw()
-
-arcade.draw_text('SPACE JAM', ancho//2-500, alto-300 , arcade.color.DEEP_LEMON, 70)
-arcade.draw_text('Nuevo Juego', ancho//2-500, alto//2 , colorLetras, 32)
-arcade.draw_text('Mejores Puntajes', ancho//2-500, alto//2-50 , colorLetras, 32)
-arcade.draw_text('Salir del Juego', ancho//2-500, alto//2-100 , colorLetras, 32)
-
-arcade.finish_render()
-
-arcade.run()
-
-
-
-
-
-def main():
-    window = arcade.Window(SCREEN_WIDHT, SCREEN_HEIGHT, SCREEN_TITLE)
-    start_view = MenuView()
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    start_view = InstructionView()
     window.show_view(start_view)
     arcade.run()
-
 
 if __name__ == "__main__":
     main()
