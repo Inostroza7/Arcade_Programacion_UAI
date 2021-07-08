@@ -182,6 +182,9 @@ class MyGame(arcade.View):
         # Esta variable guarda el background
         self.background = None
 
+        # Set the background color
+        #arcade.set_background_color(arcade.color.BLACK)
+
     def setup(self):
         """ Set up the game and initialize the variables. """
 
@@ -227,9 +230,11 @@ class MyGame(arcade.View):
     # Draw all the sprites.
         self.all_sprites_list.draw()
 
+
         # Put the text on the screen.
         output = "Score: {}".format(self.score)
-        arcade.draw_text(output, 10, 70, arcade.color.AMBER, 14)
+        arcade.draw_text(output, 1200, 700, arcade.color.AMBER, 14)
+
 
     def on_key_press(self, symbol, modifiers):
         """ Called whenever a key is pressed. """
