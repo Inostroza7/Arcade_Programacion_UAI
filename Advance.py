@@ -182,6 +182,8 @@ class MyGame(arcade.View):
         # Esta variable guarda el background
         self.background = None
 
+
+
         # Set the background color
         #arcade.set_background_color(arcade.color.BLACK)
 
@@ -199,6 +201,12 @@ class MyGame(arcade.View):
         self.asteroid_list = arcade.SpriteList()
         self.bullet_list = arcade.SpriteList()
         self.ship_life_list = arcade.SpriteList()
+
+        # Agregamos el mapa de fondo background
+        self.map = arcade.tilemap.read_tmx('maps/map.tmx')
+        # Cargamos la imagen de fondo
+        self.fondo = arcade.SpriteList(use_spatial_hash=True)
+        self.fondo.extend(arcade.tilemap.process_layer(self.map, "fondo"))
 
         # Set up the player
         self.score = 0
@@ -225,10 +233,12 @@ class MyGame(arcade.View):
         arcade.start_render()
 
         # Draw the background texture
-        arcade.draw_lrwh_rectangle_textured(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT,self.background)
+        #arcade.draw_lrwh_rectangle_textured(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT,self.background)
 
     # Draw all the sprites.
+        self.fondo.draw()
         self.all_sprites_list.draw()
+
 
 
         # Put the text on the screen.
